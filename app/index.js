@@ -2,4 +2,4 @@ import { App } from "./app.js";
 
 const d = document;
 
-d.addEventListener("DOMContentLoaded",App)
+d.addEventListener("DOMContentLoaded",App())
