@@ -1,10 +1,12 @@
+import { Loader } from "./Loader.js";
+import { Nav } from "./Nav.js";
+import { FormSearch } from "./FormSearch.js";
+
 export function Main(){
-    const $main = document.createElement("main"),
-    $h1 = document.createElement("h1");
+    const $main = document.createElement("main");
     
-    $h1.innerText="Faker Store";
     $main.id="main";
     $main.classList.add("grid-fluid");
-    $main.appendChild($h1);
+    
     return $main;
 }
