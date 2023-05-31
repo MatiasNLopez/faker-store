@@ -1,0 +1,57 @@
+:root{
+    --background-procut-card: #F2F2F2;
+}
+
+html{
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+*,
+*:before,
+*:after{
+    box-sizing: inherit;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+.header{
+    width: 100%;
+    padding: .5rem;
+    text-align: center;
+    background-color: #1152FD;
+}
+
+.grid-fluid{
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.nav{
+    padding: .5rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: var(--background-procut-card);
+}
+
+.product-card{
+    max-width: 140px;
+    height: 200px;
+    padding: 1rem;
+    margin: .5rem;
+    background-color: var(--background-procut-card);
+}
+
+.product-card img{
+    width: 50%;
+    height: auto;
+}
