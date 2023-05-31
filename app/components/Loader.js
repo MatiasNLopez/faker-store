@@ -4,6 +4,6 @@ export function Loader(){
     const $loader = document.createElement('img');
     $loader.src = conf.icons.spiner;
     $loader.alt= "Cargando...";
-    $loader.classList.add('Loader');
+    $loader.classList.add('loader');
     return $loader;
 }
