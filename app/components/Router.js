@@ -8,9 +8,11 @@ export async function Router() {
     const d = document,
         w = window,
         $main = d.querySelector('main'),
+        $loader = d.querySelector('.loader'),
         hash = w.location.hash;
 
     $main.innerHTML = null;
+
 
     if(!hash || hash === conf.rutes.home){
         await ajax({
@@ -27,5 +29,7 @@ export async function Router() {
             }
         })
     }
-
+    
+    $loader.style.display = "none";
+    
 }
