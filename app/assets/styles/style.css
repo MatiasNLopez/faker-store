@@ -2,10 +2,12 @@
     --background-procut-card: #F2F2F2;
 }
 
+
 html{
     box-sizing: border-box;
     font-family: sans-serif;
     font-size: 1rem;
+    word-wrap: break-word;
 }
 
 *,
@@ -14,9 +16,18 @@ html{
     box-sizing: inherit;
 }
 
+body{
+    margin: 0;
+    /* overflow-x: hidden; */
+}
+
 img{
     max-width: 100%;
     height: auto;
+}
+
+#root{
+    width: 100%;
 }
 
 .header{
@@ -27,9 +38,12 @@ img{
 }
 
 .grid-fluid{
-    width: 90%;
+    margin: 1rem;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, 1fr);
+    justify-items: center;
+    gap: 1rem;
 }
 
 .nav{
@@ -43,15 +57,44 @@ img{
     background-color: var(--background-procut-card);
 }
 
+
 .product-card{
-    max-width: 140px;
-    height: 200px;
-    padding: 1rem;
-    margin: .5rem;
+    width: 315px;
+    height:160px;
+    display: flex;
+    align-items: center;
+    padding: .3rem;
+    margin: .2rem;
+    border-radius: 1rem;
     background-color: var(--background-procut-card);
 }
 
+.image-content{
+    padding: .2rem;
+    margin: .2rem;
+    min-width: 50%;
+    height: 90%;
+    text-align: center;
+    background-color: #fff;
+}
+
 .product-card img{
-    width: 50%;
-    height: auto;
+    height: 90%;
+    margin-top: .2rem;
+}
+
+.product-card_description{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card p {
+    height: 3.8rem;
+    align-self: flex-start;
+    padding: .5rem;
+    margin: .2rem;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
