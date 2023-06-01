@@ -3,6 +3,7 @@ import conf from "../config/const.js";
 import api from "../helpers/api.js";
 import { ajax } from "../helpers/ajax.js";
 import { ProductCard } from "./ProductCard.js";
+import { Product } from "./Product.js";
 
 export async function Router() { 
     const d = document,
@@ -12,14 +13,14 @@ export async function Router() {
         hash = w.location.hash;
 
     $main.innerHTML = null;
-
+    console.log(`hash: ${hash} includes: ${conf.rutes.product} -> ${hash.includes(conf.rutes.product)}`);
 
     if(!hash || hash === conf.rutes.home){
         await ajax({
             url: api.PRODUCTS,
             cbSuccess: (products)=>{
                 let html = '';
-                /* console.log(products); */
+                
 
                 products.forEach(product => {
                     html += ProductCard(product);
@@ -27,6 +28,12 @@ export async function Router() {
 
                 $main.innerHTML = html;
             }
+        })
+    }
+    else if(hash.includes(conf.rutes.product)){
+        await ajax({
+            url:`${api.PRODUCTS}/${hash.slice(-1)}`,
+            cbSuccess: product => $main.innerHTML = Product(product)
         })
     }
     

@@ -5,7 +5,8 @@ export default {
         favorite: "#/favorite",
         cart: "#/cart",
         profile: "#/profile",
-        search:"#/search"
+        search:"#/search",
+        product:"#/products?porductid=" /* :id */,
     },
     icons:{
         cart: "/app/assets/img/cart.svg",
