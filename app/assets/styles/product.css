@@ -44,3 +44,63 @@
 .product-card:hover{
     scale: 1.05;
 }
+
+.product-page{
+    margin: auto;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.photo{
+    width: 45%;
+}
+
+.product-page_desciption span{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: .1rem .5rem;
+}
+
+.product-page_desciption h1{
+    text-align: start;
+}
+
+.product-page_form-checkout{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    background-color: var(--background-procut-card);
+}
+
+.product-page_form-checkout span{
+    font-size: 2rem;
+}
+
+.btn-add-cart{
+    padding: .5rem;
+    background-color: var(--btn-background);
+    color: #fff;
+    border-radius: .5rem;
+}
+
+.product-quantity-container{
+    display: inherit;
+    align-items: center;
+}
+
+.product-quantity{
+    text-align: center;
+    padding: .2rem;
+    margin: 1rem;
+    border-radius: .2rem;
+}

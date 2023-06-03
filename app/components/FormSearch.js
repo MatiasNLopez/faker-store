@@ -1,4 +1,4 @@
-import conf from "../config/const.js";
+import _const from "../config/const.js";
 
 export function FormSearch(){
     const d = document,
@@ -16,7 +16,7 @@ export function FormSearch(){
 
     d.addEventListener('submit', e =>{
 
-        if(!location.hash.includes(conf.rutes.search)) return
+        if(!location.hash.includes(_const.routes.search)) return
         
     })
 

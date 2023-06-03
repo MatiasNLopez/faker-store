@@ -1,12 +1,13 @@
 :root{
     --background-procut-card: #F2F2F2;
+    --btn-background: #1152FD;
 }
 
 
 html{
     box-sizing: border-box;
-    font-family: sans-serif;
     font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
     word-wrap: break-word;
 }
 
@@ -32,17 +33,21 @@ img{
 
 .header{
     width: 100%;
-    padding: .5rem;
+    padding: 1.2rem;
     text-align: center;
     background-color: #1152FD;
+    border-radius: 0 0 1rem 1rem;
 }
 
 .grid-fluid{
-    margin: 1rem;
+    margin-top: 2rem;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-columns: 1fr;
     justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     gap: 1rem;
 }
 

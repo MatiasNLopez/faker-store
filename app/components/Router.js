@@ -1,5 +1,5 @@
 
-import conf from "../config/const.js";
+import _const from "../config/const.js";
 import api from "../helpers/api.js";
 import { ajax } from "../helpers/ajax.js";
 import { ProductCard } from "./ProductCard.js";
@@ -13,9 +13,8 @@ export async function Router() {
         hash = w.location.hash;
 
     $main.innerHTML = null;
-    console.log(`hash: ${hash} includes: ${conf.rutes.product} -> ${hash.includes(conf.rutes.product)}`);
-
-    if(!hash || hash === conf.rutes.home){
+    
+    if(!hash || hash === _const.routes.home){
         await ajax({
             url: api.PRODUCTS,
             cbSuccess: (products)=>{
@@ -30,9 +29,9 @@ export async function Router() {
             }
         })
     }
-    else if(hash.includes(conf.rutes.product)){
+    else if(hash.includes(_const.routes.product)){
         await ajax({
-            url:`${api.PRODUCTS}/${hash.slice(-1)}`,
+            url:`${api.PRODUCTS}/${localStorage.getItem('post-id')}`,
             cbSuccess: product => $main.innerHTML = Product(product)
         })
     }

@@ -1,4 +1,7 @@
-export function UserCard(Props){
+export function UserCard(props){
+
+    const {email, username, name, address, phone} = props;
+
     /* 
         id:1,
         email:'John@gmail.com',

@@ -1,4 +1,4 @@
-import conf from "./config/const.js";
+import _const from "./config/const.js";
 import { App } from "./App.js";
 import { Router } from "./components/Router.js";
 
@@ -9,8 +9,10 @@ d.addEventListener("DOMContentLoaded",App())
 d.addEventListener("click", e => {
     const element = e.target;
     if(!element.matches(".product-card *")) return;
+  
     const postId = element.closest('.product-card').getAttribute("data-id");
-    w.location.replace(`${conf.rutes.product}${postId}`)
+    localStorage.setItem('post-id',postId);
+    w.location.hash = `${_const.routes.product}${postId}`;
 })
 
 w.addEventListener("hashchange", () =>{

@@ -1,6 +1,6 @@
 
 export default {
-    rutes:{
+    routes:{
         home: "#/",
         favorite: "#/favorite",
         cart: "#/cart",
