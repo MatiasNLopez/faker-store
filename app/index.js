@@ -3,6 +3,7 @@ import api from './helpers/api.js';
 import { App } from "./App.js";
 import { Router } from "./components/Router.js";
 import { ajax } from "./helpers/ajax.js";
+import { decodeJWT } from "./helpers/jwt-token.js";
 
 const d = document,
     w = window;
@@ -33,6 +34,7 @@ d.addEventListener("click", async e => {
             },
             cbSuccess: (data) =>{
                 localStorage.setItem("token", data.token)
+                localStorage.setItem("user", decodeJWT(data.token).sub)
                 w.location.hash = `${_const.routes.login}`;
                 
             } 
