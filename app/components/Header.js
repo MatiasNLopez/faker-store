@@ -10,7 +10,6 @@ export function Header() {
         $header.appendChild(FormSearch())
     }
     else{
-        console.log("aca");
         $header.innerHTML = `<h1>Faker Store</h1>`
     }
 

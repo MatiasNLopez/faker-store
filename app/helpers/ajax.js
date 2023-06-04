@@ -5,7 +5,7 @@ export async function ajax(props){
         .then(json => cbSuccess(json))
         .catch(err =>{
             let msg = err.statusText || "Ocurrio un error al acceder a la API";
-            
+            return err;
         })
 
 }

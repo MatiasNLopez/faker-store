@@ -2,8 +2,9 @@ import _const from "./config/const.js";
 import api from './helpers/api.js';
 import { App } from "./App.js";
 import { Router } from "./components/Router.js";
-import { ajax } from "./helpers/ajax.js";
-import { decodeJWT } from "./helpers/jwt-token.js";
+import { ProductCard } from "./actions/ProductCard.js";
+import { Login } from "./actions/Login.js";
+import { Register } from "./actions/Register.js";
 
 const d = document,
     w = window;
@@ -12,33 +13,15 @@ d.addEventListener("DOMContentLoaded",App())
 d.addEventListener("click", async e => {
     const element = e.target;
     if(element.matches(".product-card *")){
-        const postId = element.closest('.product-card').getAttribute("data-id");
-        localStorage.setItem('post-id',postId);
-        w.location.hash = `${_const.routes.product}${postId}`;
+        ProductCard({element});
     }
     else if (element.matches("#login-submit")){
         e.preventDefault()
-        const $form = d.querySelector(".form-login"),
-        data = { 
-            "username": `${$form.username.value}`,
-            "password": `${$form.password.value}`
-        };
-        await ajax({
-            url: api.LOGIN,
-            options: {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            },
-            cbSuccess: (data) =>{
-                localStorage.setItem("token", data.token)
-                localStorage.setItem("user", decodeJWT(data.token).sub)
-                w.location.hash = `${_const.routes.login}`;
-                
-            } 
-        })
+        Login();
+    }
+    else if (element.matches("#register-submit")){
+        e.preventDefault();
+        Register();
     }
     else return
   
