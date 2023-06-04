@@ -1,25 +1,52 @@
 const OFFSET=0,
-    LIMIT=10,
+    LIMIT=5,
     API = 'https://fakestoreapi.com',
+    /* 
+        - Get all carts 
+        - Get a single cart ${API}/carts/id
+        - Add a new product
+        - Update and Delete a product ${API}/carts/id
+    */
     CARTS = `${API}/carts`,
-    /* Return products from OFFSET (0) to LIMIT (10)*/
-    PRODUCTS = `${API}/products`, 
+    /* Limit results of Get all carts */
+    CARTS_LIMIT = `${CARTS}/carts?limit=${LIMIT}`,
+    /* Get user carts ${CARTS}/user/id*/
+    USER_CARTS=`${CARTS}/user`,
+    /* 
+        - Get all products 
+        - Get a single product, update and delete ${API}/products/id
+        - Add new product
+    */
+    PRODUCTS =`${API}/products`,
+    /* Limit results of Get all products */
+    PRODUCTS_LIMIT = `${PRODUCTS}?limit=${LIMIT}`, 
+    /* Get products in a specific category */
+    PRODUCT_BY_CATEGORY=`${PRODUCTS}/category`,
+    /* Get all categories */
+    CATEGORIES=`${PRODUCTS}/categories`,
+    /* 
+        - Get all users 
+        - Get a single user ${API}/users/id     
+        - Update and Delete a users ${API}/users/id     
+    */
     USERS = `${API}/users`,
-    /* CHECK_EMAIL='https://api.escuelajs.co/api/v1/users/is-available', */
-    CATEGORIES=`${API}/products/categories`,
-    AUTH = `${API}/auth/login`
-    /* UPLOAD_FILES='https://api.escuelajs.co/api/v1/files/upload', */
-    /* https://api.escuelajs.co/api/v1/files/{file} */
-    /* GET_FILE='https://api.escuelajs.co/api/v1/files/'; */
+    USERS_LIMIT = `${USERS}?limit=${LIMIT}`,
+    /* - Add a new user */
+    REGISTER = `${USERS}`,
+    LOGIN = `${API}/auth/login`
+    
 
 export default {
     OFFSET,
     CARTS,
-    PRODUCTS,
-    USERS,
-    /* CHECK_EMAIL, */
+    CARTS_LIMIT,
     CATEGORIES,
-    AUTH,
-    /* UPLOAD_FILES, */
-    /* GET_FILE, */
+    USER_CARTS,
+    PRODUCTS,
+    PRODUCTS_LIMIT,
+    PRODUCT_BY_CATEGORY,
+    USERS,
+    USERS_LIMIT,
+    REGISTER,
+    LOGIN
 }
