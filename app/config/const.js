@@ -7,6 +7,8 @@ export default {
         profile: "#/profile",
         search:"#/search",
         product:"#/products?porductid=" /* :id */,
+        login: "#/login",
+        register: "#/register"
     },
     icons:{
         cart: "/app/assets/img/cart.svg",
