@@ -2,7 +2,7 @@ import _const from '../config/const.js'
 import { Component } from './Component.js';
 
 export const Loader = new Component({
-        element: "#root",
+        element: "#main",
         initialState: { 
             hash: window.location.hash
         },

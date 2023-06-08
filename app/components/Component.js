@@ -64,7 +64,7 @@ export const Component = (function () {
      *  
      * */  
     Constructor.prototype.setState = function(state){
-        for(key in state){
+        for(let key in state){
             if(this.initialState.hasOwnProperty(key))
                 this.initialState[key] = state[key]
         }

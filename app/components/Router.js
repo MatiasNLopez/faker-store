@@ -8,38 +8,46 @@ import { Login } from "./Login.js";
 import { decodeJWT } from "../helpers/jwt-token.js";
 import { Register } from "./Register.js";
 import { Main } from "./Main.js";
+import { Loader } from "./Loader.js";
 
 export async function Router() { 
     const d = document,
         w = window,
         hash = w.location.hash;
-
-    if(!localStorage.getItem("session")){
-        hash !== _const.routes.register 
-        ? Login.render()
-        : Register.render();
-    }else {
-        if(!hash || hash === _const.routes.home){
-            Products.renderAsync();
+        
+        d.getElementById('main').innerHTML = ""
+        Loader.render();
+        
+        if(!JSON.parse(localStorage.getItem("session")) && !Main.getState().session.token){
+            hash !== _const.routes.register 
+            ? Login.render()
+            : Register.render();
         }
-        else if(hash.includes(_const.routes.product)){
-            Product.renderAsync();
-        }
-        else if(hash === _const.routes.profile){
-            const id = JSON.parse(localStorage.getItem('session')).id
-            await ajax({
-                url: `${api.USERS}/${id}`,
-                cbSuccess: user => console.log(user)
-            })
-        } 
-        else if(hash === _const.routes.cart){
-            await ajax({
-                url: `${api.CARTS}`,
-                cbSuccess: products => console.log(products)
-            })
-        }
-        else if(hash === _const.routes.login || _const.routes.register) 
-            w.location.hash = _const.routes.home 
+        else {
+           
+            if(!hash || hash === _const.routes.home){
+                await Products.renderAsync();
+            }
+            else if(hash.includes(_const.routes.product)){
+                await Product.renderAsync();
+            }
+            else if(hash === _const.routes.profile){
+                const id = JSON.parse(localStorage.getItem('session')).id
+                await ajax({
+                    url: `${api.USERS}/${id}`,
+                    cbSuccess: user => console.log(user)
+                })
+            } 
+            else if(hash === _const.routes.cart){
+                await ajax({
+                    url: `${api.CARTS}`,
+                    cbSuccess: products => console.log(products)
+                })
+            }
+            else if(hash === _const.routes.login || _const.routes.register) 
+                w.location.hash = _const.routes.home 
     }
-   
+    d.querySelector(".loader").style.display = "none";
+    
+    
 }

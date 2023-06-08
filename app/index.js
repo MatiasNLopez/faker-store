@@ -3,8 +3,9 @@ import api from './helpers/api.js';
 import { App } from "./App.js";
 import { Router } from "./components/Router.js";
 import { ProductCard } from "./actions/ProductCard.js";
-import { Login } from "./actions/Login.js";
+import { Auth, Login } from "./components/Login.js";
 import { Register } from "./actions/Register.js";
+import { Loader } from "./components/Loader.js";
 
 const d = document,
     w = window;
@@ -17,7 +18,8 @@ d.addEventListener("click", async e => {
     }
     else if (element.matches("#login-submit")){
         e.preventDefault()
-        Login();
+        Auth();
+        
     }
     else if (element.matches("#register-submit")){
         e.preventDefault();
@@ -28,5 +30,5 @@ d.addEventListener("click", async e => {
 })
 
 w.addEventListener("hashchange", () =>{
-    Router()
+   Router()
 })

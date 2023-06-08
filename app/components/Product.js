@@ -9,21 +9,21 @@ export const Product = new Component({
     },
     template: async function(){
         let body="";
-        return await ajax({
+        await ajax({
             url:`${api.PRODUCTS}/${localStorage.getItem('post-id')}`,
             cbSuccess: (product) =>{
                 body =`
                     <article class="product-page">
                         <div class="photo">
-                            <img src="${image}" alt="imagen del producto" class="image-product">
+                            <img src="${product.image}" alt="imagen del producto" class="image-product">
                         </div>
                         <div class="product-page_desciption">
                             <span>  
-                                <p>Price: $${price}</p>
-                                <p>&#9733; ${rating.rate} ${rating.count} Opiniones</p>
+                                <p>Price: $${product.price}</p>
+                                <p>&#9733; ${product.rating.rate} ${product.rating.count} Opiniones</p>
                             </span>
-                            <h1>${title}</h1>
-                            <p>${description}</p>
+                            <h1>${product.title}</h1>
+                            <p>${product.description}</p>
                         </div>
                         <form class="product-page_form-checkout" action="">
                             <div class="product-quantity-container">
@@ -37,5 +37,5 @@ export const Product = new Component({
                 }
             })
             return body;
-    }
+        }
 });
