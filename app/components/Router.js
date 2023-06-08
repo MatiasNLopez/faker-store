@@ -2,47 +2,28 @@
 import _const from "../config/const.js";
 import api from "../helpers/api.js";
 import { ajax } from "../helpers/ajax.js";
-import { ProductCard } from "./ProductCard.js";
+import { Products } from "./Products.js";
 import { Product } from "./Product.js";
 import { Login } from "./Login.js";
 import { decodeJWT } from "../helpers/jwt-token.js";
 import { Register } from "./Register.js";
+import { Main } from "./Main.js";
 
 export async function Router() { 
     const d = document,
         w = window,
-        $main = d.querySelector('main'),
-        $loader = d.querySelector('.loader'),
         hash = w.location.hash;
 
-    $main.innerHTML = null;
-    
-
     if(!localStorage.getItem("session")){
-        $main.innerHTML = hash !== _const.routes.register 
-        ? Login()
-        : Register()
+        hash !== _const.routes.register 
+        ? Login.render()
+        : Register.render();
     }else {
         if(!hash || hash === _const.routes.home){
-        
-            await ajax({
-                url: api.PRODUCTS,
-                cbSuccess: (products)=>{
-                    let html = '';
-                    
-                    products.forEach(product => {
-                        html += ProductCard(product);
-                    });
-    
-                    $main.innerHTML = html;
-                }
-            })
+            Products.renderAsync();
         }
         else if(hash.includes(_const.routes.product)){
-            await ajax({
-                url:`${api.PRODUCTS}/${localStorage.getItem('post-id')}`,
-                cbSuccess: product => $main.innerHTML = Product(product)
-            })
+            Product.renderAsync();
         }
         else if(hash === _const.routes.profile){
             const id = JSON.parse(localStorage.getItem('session')).id
@@ -58,9 +39,7 @@ export async function Router() {
             })
         }
         else if(hash === _const.routes.login || _const.routes.register) 
-            w.location.hash = _const.routes.home
+            w.location.hash = _const.routes.home 
     }
    
-    $loader.style.display = "none";
-    
 }

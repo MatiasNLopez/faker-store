@@ -1,9 +1,15 @@
 import _const from '../config/const.js'
+import { Component } from './Component.js';
 
-export function Loader(){
-    const $loader = document.createElement('img');
-    $loader.src = _const.icons.spiner;
-    $loader.alt= "Cargando...";
-    $loader.classList.add('loader');
-    return $loader;
-}
+export const Loader = new Component({
+        element: "#root",
+        initialState: { 
+            hash: window.location.hash
+        },
+        template: function(props) {
+            return `
+                <img src="${_const.icons.spiner}" alt=Cargando..." class="loader">
+            `
+        }
+    });
+

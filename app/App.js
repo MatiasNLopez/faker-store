@@ -7,12 +7,9 @@ import { Router } from "./components/Router.js";
 export function App(){
     const d = document,
     $root = d.getElementById("root");
-
-    $root.appendChild(Header());
-    $root.appendChild(Main());
-    $root.appendChild(Loader());
-    $root.appendChild(Nav());
-
-    Router()
-    
+    Header.render()
+    Main.render();
+    Loader.render();
+    Nav.render();
+    Router();
 }

@@ -1,17 +1,17 @@
 import _const from "../config/const.js";
+import { Component } from "./Component.js";
 import { FormSearch } from "./FormSearch.js";
-export function Header() {
-    const $header = document.createElement("header");
-    
-    $header.classList.add("header");
-    console.log(window.location.hash);
 
-    if(!window.location.hash || window.location.hash ===  _const.routes.home){
-        $header.appendChild(FormSearch())
+export const Header = new Component({
+    element: "#root",
+    initialState: { 
+        hash: window.location.hash
+    },
+    template: function(props) {
+        return `
+            <header class="header">
+                <h1>Faker Store</h1>
+            </header>
+        `
     }
-    else{
-        $header.innerHTML = `<h1>Faker Store</h1>`
-    }
-
-    return $header;
-}
+});
