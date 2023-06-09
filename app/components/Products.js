@@ -31,6 +31,12 @@ export const Products = new Component({
             },
         });
         return htmlTemplate;
+    },
+    event: async function(){
+        const el = document.querySelector(".product-card *");
+        const postId = el.closest('.product-card').getAttribute("data-id");
+        localStorage.setItem('post-id',postId);
+        window.location.hash = `${_const.routes.product}${postId}`;
     }
     
 })

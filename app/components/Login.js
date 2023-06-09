@@ -19,10 +19,13 @@ export const Login = new Component({
                 <input id="login-submit" type="submit" value="Iniciar">
             </form>
         `
+    },
+    event: async function(){
+        await Auth();
     }
 })
 
-export async function Auth() {
+async function Auth() {
     const $form = document.querySelector(".form-login"),
         data = { 
             "username": `${$form.username.value}`,

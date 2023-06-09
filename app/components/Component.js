@@ -19,9 +19,9 @@ export const Component = (function () {
      * */  
     const Constructor = function(props){
         this.element = props.element;
-        /* this.data = props.data; */
-        this.initialState = props.initialState || {};
-        this.template = props.template
+        this.initialState = props.initialState;
+        this.template = props.template;
+        this.event = props.event;
     }
 
      /** 
@@ -118,6 +118,10 @@ export const Component = (function () {
 
     Constructor.prototype.getTemplateHTML = function(){
         return this.template(this.initialState)
+    }
+
+    Constructor.prototype.getEvent = async function(){
+        return await this.event();
     }
 
     return Constructor;
