@@ -9,6 +9,7 @@ import { decodeJWT } from "../helpers/jwt-token.js";
 import { Register } from "./Register.js";
 import { Main } from "./Main.js";
 import { Loader } from "./Loader.js";
+import { Profile } from "./Profile.js";
 
 export async function Router() { 
     const d = document,
@@ -32,11 +33,7 @@ export async function Router() {
                 await Product.renderAsync();
             }
             else if(hash === _const.routes.profile){
-                const id = JSON.parse(localStorage.getItem('session')).id
-                await ajax({
-                    url: `${api.USERS}/${id}`,
-                    cbSuccess: user => console.log(user)
-                })
+                await Profile.renderAsync();
             } 
             else if(hash === _const.routes.cart){
                 await ajax({

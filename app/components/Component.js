@@ -4,6 +4,7 @@ export const Component = (function () {
      * @param {String} element elemento donde se redenriza el template. 
      * @param {object} initalState estado inicial del componente
      * @param {function} template estructura html del componente
+     * @param {function} event eventos del componente
      * @returns {Constructor} 
      * @example new component({
         element: "#root",
