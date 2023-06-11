@@ -10,6 +10,7 @@ import { Register } from "./Register.js";
 import { Main } from "./Main.js";
 import { Loader } from "./Loader.js";
 import { Profile } from "./Profile.js";
+import { Cart } from "./Cart.js";
 
 export async function Router() { 
     const d = document,
@@ -28,7 +29,9 @@ export async function Router() {
            
             if(!hash || hash === _const.routes.home){
                 await Products.renderAsync();
+                
             }
+            
             else if(hash.includes(_const.routes.product)){
                 await Product.renderAsync();
             }
@@ -36,10 +39,7 @@ export async function Router() {
                 await Profile.renderAsync();
             } 
             else if(hash === _const.routes.cart){
-                await ajax({
-                    url: `${api.CARTS}`,
-                    cbSuccess: products => console.log(products)
-                })
+                await Cart.renderAsync();
             }
             else if(hash === _const.routes.login || _const.routes.register) 
                 w.location.hash = _const.routes.home 

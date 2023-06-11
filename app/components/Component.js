@@ -100,10 +100,8 @@ export const Component = (function () {
     }
     *  
     * */  
-    Constructor.prototype.setTemplate = function(template){
-        this.template = function(props) {
-            return template
-        }
+    Constructor.prototype.setTemplate = function(newTemplate){
+        this.template = newTemplate
         
     }
     
@@ -123,6 +121,10 @@ export const Component = (function () {
 
     Constructor.prototype.getEvent = async function(){
         return await this.event();
+    }
+
+    Constructor.prototype.setElement = function(element){
+        this.element = element;
     }
 
     return Constructor;
