@@ -1,0 +1,29 @@
+.profile{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile section{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    margin: .5rem;
+    padding: 1rem;
+    background-color: var(--background-procut-card);
+}
+
+.profile h2{
+    text-align: center;
+}
+
+.profile section h3{
+    text-align: center;
+    align-self: flex-end;
+}
+
+.profile a {
+    text-align: center;
+    text-decoration: none;
+}
