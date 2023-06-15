@@ -1,3 +1,4 @@
+import _const from "../config/const.js";
 import { ajax } from "../helpers/ajax.js";
 import { Component } from "./Component.js";
 import api from "../helpers/api.js"
