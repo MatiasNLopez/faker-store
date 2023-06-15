@@ -12,45 +12,25 @@ import { Products } from "./Products.js";
 
 export const Cart = new Component({
     element: "#main",
-    initialState:{},
+    initialState:{
+        carts: await initialCartsState(),
+    },
     template: async function(props){
-        const id = JSON.parse(localStorage.getItem('session')).id
-        let htmlProduct = '',
-        productPromise = {id:[],urls:[]},
-        priceTotal = 0,
-        carts =  await getCartsUser(id);
-        
-        /* Create urls product promise */
-        carts.forEach(cart =>{
-            cart.products.forEach(product => {
-                if(productPromise.id.indexOf(product.productId) < 0){
-                    productPromise.id.push(product.productId);
-                    productPromise.urls.push(fetch(`${api.PRODUCTS}/${product.productId}`));
-                }
-            });
-        })
+        let firtCart = props.carts["0"],
+            htmlProduct = '';
 
-        /* Get Prodcut  */
-        productPromise.urls = await getProductCarts(productPromise.urls);
-        
-        /* Set data Product in carts  */
-        carts.forEach(cart =>
-            cart
-            .products
-            .forEach(products => products["data"] = productPromise.urls[`${products.productId}`])
-        )
-            
-        carts["0"].products.forEach(product => {
-            priceTotal += product.data.price
+        firtCart.products.forEach(product => {
             htmlProduct += 
-                `<article class="product-card" data-id="${product.productId}">
-                    <div class="image-content">
+                `<article class="cart-product" data-id="${product.productId}">
+                    <div class="cart-prodcut_image">
                         <img src="${product.data.image}" alt="${product.data.title}">
                         <span>  
-                            <small>&#9733; ${product.data.rating.rate} ${product.data.rating.count} Opiniones</small>
+                            <button id="del-quantity" class="btn">-</button>
+                            <input id="quantity" type="Number" min=1 max=50 value=${product.quantity}>
+                            <button id="add-quantity" class="btn">+</button>
                         </span>
                     </div>
-                    <div class="product-card_description">
+                    <div class="cart-product-description">
                         <p>${product.data.title}</p>
                         <h3>$${product.data.price}</h3>
                     </div>
@@ -58,18 +38,65 @@ export const Cart = new Component({
         });
         
         return `
-            <section class="productsSection">
+            
+            <section calass="cart">
+                <p>Date ${new Date(firtCart.date).toLocaleDateString()}</p>
                 ${htmlProduct}
-            </section>
-            <section class="checkoutSection">
-                <strong> Total $${priceTotal}</strong>
-                <input type="button" name="" id="" value="Comprar">
+                <aside class="checkoutSection">
+                    <strong> Total $${firtCart.priceTotal}</strong>
+                    <input type="button" name="" id="" value="Comprar">
+                </aside>
             </section>`
     },
-    event: async function(){
+    event: async function(props){
+        
+        const $quantity = d.getElementById("quantity");
+                
+        e.target().matches("del-quantity") 
+        ? $quantity.value -=1
+        : $quantity.value +=1;
 
+    
     }
 });
+
+
+async function initialCartsState(){
+    const id = JSON.parse(localStorage.getItem('session')).id;
+    let carts = await getCartsUser(id),
+    promises = createProductPromise(carts);
+
+    /* Get Prodcut  */
+    promises.urls = await getProductCarts(promises.urls);
+        
+    /* Set data Product in carts  */
+    carts.forEach(cart =>{
+        cart["priceTotal"] = 0;
+        cart
+        .products
+        .forEach(product => {
+            product["data"] = promises.urls[`${product.productId}`];
+            cart["priceTotal"] += product["data"].price * product.quantity;
+        })
+    })
+    
+    return carts;
+}
+
+
+function createProductPromise(carts){
+    let productPromise = {id:[],urls:[]};
+
+    carts.forEach(cart =>{
+        cart.products.forEach(product => {
+            if(productPromise.id.indexOf(product.productId) < 0){
+                productPromise.id.push(product.productId);
+                productPromise.urls.push(fetch(`${api.PRODUCTS}/${product.productId}`));
+            }
+        });
+    })
+    return productPromise;
+}
 
 async function getCartsUser(id) {  
     let carts = {};
