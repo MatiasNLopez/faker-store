@@ -1,10 +1,10 @@
 export const Component = (function () {
     /** 
      * @name Component Constructor 
-     * @param {String} element elemento donde se redenriza el template. 
-     * @param {object} initalState estado inicial del componente
-     * @param {function} template estructura html del componente
-     * @param {function} event eventos del componente
+     * @param {String} element element where the component template is rendered. 
+     * @param {object} initalState component initial state.
+     * @param {function} template component html structure. 
+     * @param {function} event component events actions. (the function must be asynchronous)
      * @returns {Constructor} 
      * @example new component({
         element: "#root",
@@ -14,6 +14,12 @@ export const Component = (function () {
         template: function(props) {
             return `
                 <main id="main" class="main"></main>`
+        })
+        event: async function(props) {
+            const el = document.querySelector(".product-card *");
+            const postId = el.closest('.product-card').getAttribute("data-id");
+            localStorage.setItem('post-id',postId);
+            window.location.hash = `${_const.routes.product}${postId}`;
         })
     }
      *  
@@ -26,8 +32,8 @@ export const Component = (function () {
     }
 
      /** 
-      * @name render - renderiza el template
-     *  @return Renderiza el template en el elemento (this.element) 
+      * @function render - render the template 
+     *  @return Renders the template on the element (this.element) 
     }
      *  
      * */  
@@ -39,11 +45,12 @@ export const Component = (function () {
         if(!$el) return;
         
         $el.innerHTML += this.template(this.initialState);
+       
     }
 
     /** 
-      * @name renderAsync- renderiza el template de forma asincrona 
-     *  @return Renderiza el template en el elemento (this.element) 
+      * @function renderAsync- asynchronously render the template 
+     *  @return Renders the template asynchronously on the element (this.element)
     }
      *  
      * */  
@@ -58,8 +65,8 @@ export const Component = (function () {
     }
 
      /** 
-      * @name setState - Esta funcion cambia el estado
-     *  @param state nuevo estado
+      * @function setState - This function changes the state 
+     *  @param state new component state
      *  @returns void
     }
      *  
@@ -73,7 +80,7 @@ export const Component = (function () {
 
     
     /** 
-        * @name getState - Esta funcion devuelve una copia del estado
+        * @function getState - This function returns a copy of the state
         * @returns copy this.initialState
     }
     *  
@@ -83,8 +90,8 @@ export const Component = (function () {
     }
 
     /** 
-        * @name clearTemplate - Esta funcion devuelve el template vacio
-        * @returns template empty
+        * @function clearTemplate - this function clears the template
+        * @returns returns the empty template
     }
     *  
     * */  
@@ -95,8 +102,8 @@ export const Component = (function () {
     }
 
      /** 
-        * @name setTemplate - Esta funcion cambia el template html del componente
-        
+        * @function setTemplate - This function replaces the html template of the component
+        * @returns void
     }
     *  
     * */  
@@ -106,7 +113,7 @@ export const Component = (function () {
     }
     
     /** 
-        * @name getTemplate - Esta funcion devuelve el template html del componente
+        * @function getTemplate - This function returns the template of the component
         * @returns this.template
     }
     *  
@@ -114,15 +121,26 @@ export const Component = (function () {
     Constructor.prototype.getTemplate = function(){
         return this.template
     }
-
+    /**
+     * @function getTemplateHTML This function returns the template of the component in html
+     * @returns this.template(this.initialState)
+     */
     Constructor.prototype.getTemplateHTML = function(){
         return this.template(this.initialState)
     }
 
+    /**
+     * @function getEvent This function returns component events synchronously
+     * @returns this.event()
+     */
     Constructor.prototype.getEvent = async function(){
         return await this.event();
     }
 
+    /**
+     * @function setElement This function replaces the element where the template is rendered
+     * @returns void
+     */
     Constructor.prototype.setElement = function(element){
         this.element = element;
     }
