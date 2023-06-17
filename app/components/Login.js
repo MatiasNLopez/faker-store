@@ -21,11 +21,17 @@ export const Login = new Component({
         `
     },
     event: async function(){
-        await Auth();
+        const d = document;
+        d.addEventListener('click',async e => {
+            e.preventDefault();
+            if(e.target.matches("#login-submit")){
+                await Auth(d,e);
+            }
+        })
     }
 })
 
-async function Auth() {
+async function Auth(d,e) {
     const $form = document.querySelector(".form-login"),
         data = { 
             "username": `${$form.username.value}`,

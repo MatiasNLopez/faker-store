@@ -34,10 +34,21 @@ export const Products = new Component({
         return htmlTemplate;
     },
     event: async function(){
-        const el = document.querySelector(".product-card *");
-        const postId = el.closest('.product-card').getAttribute("data-id");
-        localStorage.setItem('post-id',postId);
-        window.location.hash = `${_const.routes.product}${postId}`;
+
+        const d = document;
+        d.addEventListener('click', e => {
+            viewProdcut(d,e)
+        })
+        
     }
     
 })
+
+function viewProdcut(d,e){
+    if(!e.target.matches('.product-card *')) return
+    
+    const el = d.closest(".product-card");
+    const postId = el.getAttribute("data-id");
+    localStorage.setItem('post-id',postId);
+    window.location.hash = `${_const.routes.product}${postId}`;
+}

@@ -57,11 +57,12 @@ export const Component = (function () {
     Constructor.prototype.renderAsync = async function(){
         
         if(!this.element) return;
-        
         const $el = document.querySelector(this.element);
         if(!$el) return;
         
         $el.innerHTML += await this.template(this.initialState);
+        
+        if (this.event) this.event()
     }
 
      /** 

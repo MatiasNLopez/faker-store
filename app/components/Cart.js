@@ -16,9 +16,9 @@ export const Cart = new Component({
         carts: await initialCartsState(),
     },
     template: async function(props){
+        
         let firtCart = props.carts["0"],
             htmlProduct = '';
-
         firtCart.products.forEach(product => {
             htmlProduct += 
                 `<article class="cart-product" data-id="${product.productId}">
@@ -49,26 +49,33 @@ export const Cart = new Component({
             </section>`
     },
     event: async function(props){
+        const d = document;
         
-        const $quantity = d.getElementById("quantity");
-                
-        e.target().matches("del-quantity") 
-        ? $quantity.value -=1
-        : $quantity.value +=1;
+       d.addEventListener('click', e => {
+            if(e.target.matches("#del-quantity") || e.target.matches("#add-quantity")){
+                const el = e.target.closest('.cart-product'),
+                    $quantity =  el.querySelector("#quantity");
 
+                let value =  Number.parseInt($quantity.value);
+                e.target.matches("#del-quantity") 
+                ? $quantity.value = value > $quantity.min ? value - 1 : value
+                : $quantity.value = value < $quantity.max ? value + 1 : value;
+            }
+       })
     
     }
 });
 
 
 async function initialCartsState(){
-    const id = JSON.parse(localStorage.getItem('session')).id;
+    const id = JSON.parse(localStorage.getItem('session'))?.id;
+    if(!id)  return
     let carts = await getCartsUser(id),
     promises = createProductPromise(carts);
-
+    
     /* Get Prodcut  */
     promises.urls = await getProductCarts(promises.urls);
-        
+    
     /* Set data Product in carts  */
     carts.forEach(cart =>{
         cart["priceTotal"] = 0;
@@ -79,6 +86,7 @@ async function initialCartsState(){
             cart["priceTotal"] += product["data"].price * product.quantity;
         })
     })
+    
     
     return carts;
 }

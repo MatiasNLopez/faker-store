@@ -11,34 +11,6 @@ const d = document,
 
 d.addEventListener("DOMContentLoaded",App())
 
-d.addEventListener("click", async e => {
-    const element = e.target;
-    if(element.matches(".product-card *")){
-        await Products.getEvent();
-    }
-    else if (element.matches("#login-submit")){
-        e.preventDefault()
-        await Login.getEvent();
-        
-    }
-    else if (element.matches("#register-submit")){
-        e.preventDefault();
-        await Register.getEvent();
-    }
-    else if(element.matches("#del-quantity") || element.matches("#add-quantity")){
-        const $quantity = d.getElementById("quantity");
-        let value =  Number.parseInt($quantity.value);
-        
-        element.matches("#del-quantity") 
-        ? $quantity.value = value > $quantity.min ? value - 1 : value
-        : $quantity.value = value < $quantity.max ? value + 1 : value;
-    }
-
-    else return
-  
-})
-
 w.addEventListener("hashchange", () =>{
    Router()
 })
-

@@ -22,12 +22,18 @@ export const Register = new Component({
         `
     }, 
     event: async function(){
-        RegisterUser()
+        const d = document;
+        d.addEventListener('click', async e => {
+            e.preventDefault();
+            if(e.target.matches("#register-submit")){
+                await RegisterUser(d,e)
+            }
+        })
     }
 });
 
-async function RegisterUser() {
-    const $form = document.querySelector(".form-register"),
+async function RegisterUser(d,e) {
+    const $form = d.querySelector(".form-register"),
         data = { 
             email: `${$form.email.value}`,
             username: `${$form.username.value}`,

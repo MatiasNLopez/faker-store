@@ -39,6 +39,7 @@ export async function Router() {
                 await Profile.renderAsync();
             } 
             else if(hash === _const.routes.cart){
+                
                 await Cart.renderAsync();
             }
             else if(hash === _const.routes.login || _const.routes.register) 
