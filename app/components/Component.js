@@ -45,7 +45,9 @@ export const Component = (function () {
         if(!$el) return;
         
         $el.innerHTML += this.template(this.initialState);
-       
+        
+        if (this.event) this.event()
+
     }
 
     /** 
@@ -62,7 +64,7 @@ export const Component = (function () {
         
         $el.innerHTML += await this.template(this.initialState);
         
-        if (this.event) this.event()
+        if (this.event) this.event() 
     }
 
      /** 

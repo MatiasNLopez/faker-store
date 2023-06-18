@@ -20,19 +20,23 @@ export const Login = new Component({
             </form>
         `
     },
-    event: async function(){
+    event: async function(props){
         const d = document;
-        d.addEventListener('click',async e => {
-            e.preventDefault();
-            if(e.target.matches("#login-submit")){
+        d.addEventListener("click", async e => {
+            const element = e.target;
+            if (element.matches("#login-submit")){
+                e.preventDefault() 
                 await Auth(d,e);
+                
             }
         })
+        
+        
     }
 })
 
 async function Auth(d,e) {
-    const $form = document.querySelector(".form-login"),
+    const $form = d.querySelector(".form-login"),
         data = { 
             "username": `${$form.username.value}`,
             "password": `${$form.password.value}`
@@ -48,6 +52,7 @@ async function Auth(d,e) {
             body: JSON.stringify(data)
         },
         cbSuccess: (user) =>{
+            console.log(user);
             Main
             .setState({
                 session: {
